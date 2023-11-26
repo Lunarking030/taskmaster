@@ -1,4 +1,9 @@
 <?php
+
+
+// backend file for processing the login for user, written by John-Bryan Nicdao
+
+
 session_start();
 
 $myserver = "localhost";

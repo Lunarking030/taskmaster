@@ -1,4 +1,8 @@
 <?php
+
+
+// backend file for processing the registration for the user, written by John-Bryan Nicdao
+
 session_start();
 
 $myserver = "localhost";
