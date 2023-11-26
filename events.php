@@ -1,4 +1,7 @@
 <?php
+
+//backend file for creating events in the calendar page, written by John-Bryan Nicdao
+
 // Connect to your MySQL database
 $servername = "localhost";
 $username = "root";
