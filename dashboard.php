@@ -98,7 +98,7 @@ if (isset($_POST['logout'])) {
 
 <div class="content">
     <h1>Welcome to your Dashboard, <span class="username"><?= $userName ?></span>!</h1>
-    <p>Testing...</p>
+    <p>Theres nothing to show here, come back for future updates...</p>
 </div>
 
 </body>
