@@ -1,3 +1,15 @@
+<?php
+// Simulated user data (replace with your actual user data retrieval logic)
+session_start();
+if(isset($_SESSION['username'])) {
+    $currentUserName = $_SESSION['username']; // Replace with the logged-in user's name
+} else {
+    // Redirect if not logged in
+    header("Location: login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,6 +47,10 @@
             color: black;
         }
 
+        .logout {
+            float: right;
+        }
+
         .content {
             padding: 20px;
         }
@@ -56,23 +72,15 @@
             box-sizing: border-box;
         }
 
-         /* Styling for the logout button */
-         .logout {
-            float: right;
-            margin-right: 20px;
+        /* Profile picture upload styles */
+        .profile-upload {
+            margin-top: 20px;
         }
 
-        .logout a {
+        .profile-upload input[type="file"],
+        .profile-upload input[type="submit"] {
+            margin-top: 10px;
             display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-
-        .logout a:hover {
-            background-color: #ddd;
-            color: black;
         }
     </style>
 </head>
@@ -85,7 +93,7 @@
     <li><a href="events.php">Events</a></li>
     <li><a href="account_settings.php">Account Settings</a></li>
     <li class="logout">
-        <form action="" method="post">
+        <form action="logout.php" method="post">
             <input type="submit" name="logout" value="Logout" style="display: none;">
             <a href="#" onclick="this.parentNode.submit(); return false;">Logout</a>
         </form>
@@ -95,6 +103,7 @@
 <div class="content">
     <h1>Account Settings</h1>
     <div class="account-form">
+        <!-- Forms for changing username and password -->
         <form action="update_profile.php" method="post">
             <h3>Change Username</h3>
             <input type="text" name="new_username" placeholder="Enter new username" required>
@@ -106,6 +115,15 @@
             <input type="password" name="new_password" placeholder="Enter new password" required>
             <input type="submit" value="Change Password">
         </form>
+
+        <!-- Profile picture upload form -->
+        <div class="profile-upload">
+            <h3>Upload Profile Picture</h3>
+            <form action="upload_profile_picture.php" method="post" enctype="multipart/form-data">
+                <input type="file" name="profile_picture" accept="image/png, image/jpeg, image/gif" required>
+                <input type="submit" value="Upload">
+            </form>
+        </div>
     </div>
 </div>
 
