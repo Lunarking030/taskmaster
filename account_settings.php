@@ -1,4 +1,8 @@
 <?php
+
+// Frontend file for displaying account settings page, written by John-Bryan Nicdao
+
+
 // Simulated user data (replace with your actual user data retrieval logic)
 session_start();
 if(isset($_SESSION['username'])) {
