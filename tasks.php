@@ -1,3 +1,33 @@
+<?php
+
+// Frontend file for displaying the tasks page, written by John-Bryan Nicdao
+
+// Database connection
+$myserver = "localhost";
+$myuserid = "root"; // Replace with your MySQL username
+$mypassword = NULL; // Replace with your MySQL password
+$mydatabase = "taskmaster"; // Replace with your database name
+
+$mysqli = mysqli_connect($myserver, $myuserid, $mypassword, $mydatabase);
+
+// Check connection
+if (mysqli_connect_errno()) {
+    die("Failed to connect to MySQL: " . mysqli_connect_error());
+}
+
+// Fetch tasks from the database
+$query = "SELECT * FROM tasks"; // Modify the query according to your table structure
+$result = mysqli_query($mysqli, $query);
+
+// Check if query execution was successful
+if (!$result) {
+    die("Error: " . mysqli_error($mysqli));
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,20 +137,38 @@
 
     <!-- Task list -->
     <div class="task-list">
-        <!-- PHP code to fetch tasks from the database and display them -->
-        <?php
-        // Implement PHP logic here to fetch tasks from the database and display them
+        
+        <?php 
+        while ($row = mysqli_fetch_assoc($result)) { ?>
+    <div class="task">
+        <h3><?php echo $row['task_name']; ?></h3>
+        <p><?php echo $row['task_details']; ?></p>
+        <p>Due Date: <?php echo $row['due_date']; ?></p>
+        <p>Priority: <?php echo $row['priority']; ?></p>
+        
+        <form action="update_task.php" method="post">
+            <input type="hidden" name="task_id" value="<?php echo $row['id']; ?>">
+            <button type="submit">Update</button>
+        </form>
+    
+        <form action="complete_task.php" method="post">
+            <input type="hidden" name="task_id" value="<?php echo $row['id']; ?>">
+            <button type="submit">Complete</button>
+        </form>
+    
+        <form action="delete_task.php" method="post">
+            <input type="hidden" name="task_id" value="<?php echo $row['id']; ?>">
+            <button type="submit">Delete</button>
+        </form>
+    </div>
+<?php } 
+
+        // Free the result set
+        mysqli_free_result($result);
+
+        // Close the database connection
+        mysqli_close($mysqli);
         ?>
-        <!-- Sample Task (replace this with PHP code to display tasks) -->
-        <div class="task">
-            <h3>Task Name</h3>
-            <p>Task Details</p>
-            <p>Due Date: 2023-12-31</p>
-            <p>Priority: High</p>
-            <button>Update</button>
-            <button>Complete</button>
-        </div>
-        <!-- End of Sample Task -->
     </div>
 </div>
 
