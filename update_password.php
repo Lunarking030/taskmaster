@@ -1,6 +1,5 @@
 <?php
-
-//backend file for updating user password, written by John-Bryan Nicdao
+// Backend file for updating user password, written by John-Bryan Nicdao
 
 // Establish your database connection here
 session_start();
@@ -21,26 +20,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['current_password']) &&
 
     // Add validation here if needed
 
-    // Check the current password (example check; you should hash and compare with stored hash)
-    // $userId = $_SESSION['user_id']; // Fetch user ID from session
-    // $sql = "SELECT password FROM users WHERE id = $userId";
-    // Execute the query using your database connection and retrieve the stored hash
-    // Compare the current password with the stored hash using password_verify()
+    // Placeholder for password verification and update logic
+    // Example: fetching hashed password from the database using user ID from session
+    $userId = $_SESSION['user_id']; // Fetch user ID from session
+    $sql = "SELECT password FROM users WHERE id = $userId";
+    $result = mysqli_query($mysqli, $sql);
 
-    // If password verification is successful:
-    // Update the password in the database
-    // Hash the new password before storing it (use password_hash())
-    // Perform the SQL query to update the password for the logged-in user
-    // Example (assuming you have a users table):
-    // $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-    // $sql = "UPDATE users SET password = '$hashedPassword' WHERE id = $userId";
-    // Execute the query using your database connection
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        $hashedPasswordFromDB = $row['password'];
 
-    // Redirect back to account settings or home page after updating
-    header("Location: account_settings.php");
-    exit();
+        // Verify current password against stored hash
+        if (password_verify($currentPassword, $hashedPasswordFromDB)) {
+            // Password verification successful, hash the new password
+            $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+            // Update the password in the database
+            $updateQuery = "UPDATE users SET password = '$hashedNewPassword' WHERE id = $userId";
+            $updateResult = mysqli_query($mysqli, $updateQuery);
+
+            if ($updateResult) {
+                // Password updated successfully
+                header("Location: account_settings.php");
+                exit();
+            } else {
+                // Handle database update error
+                echo "Error updating password: " . mysqli_error($mysqli);
+            }
+        } else {
+            // Handle incorrect current password
+            echo "Incorrect current password!";
+        }
+    } else {
+        // Handle database query error
+        echo "Error fetching user data: " . mysqli_error($mysqli);
+    }
+
+    // Free the result set
+    mysqli_free_result($result);
 } else {
     // Handle if the form wasn't submitted properly
     echo "Invalid request!";
 }
+
+// Close the database connection
+mysqli_close($mysqli);
 ?>

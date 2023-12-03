@@ -138,37 +138,65 @@ if (!$result) {
     <!-- Task list -->
     <div class="task-list">
         
-        <?php 
-        while ($row = mysqli_fetch_assoc($result)) { ?>
-    <div class="task">
-        <h3><?php echo $row['task_name']; ?></h3>
-        <p><?php echo $row['task_details']; ?></p>
-        <p>Due Date: <?php echo $row['due_date']; ?></p>
-        <p>Priority: <?php echo $row['priority']; ?></p>
-        
-        <form action="update_task.php" method="post">
-            <input type="hidden" name="task_id" value="<?php echo $row['id']; ?>">
-            <button type="submit">Update</button>
-        </form>
+    <?php
+while ($row = mysqli_fetch_assoc($result)) {
+    echo '<div class="task">';
+    echo '<form action="update_task.php" method="post">';
+    echo '<input type="hidden" name="task_id" value="' . $row['id'] . '">'; // Task ID
     
-        <form action="complete_task.php" method="post">
-            <input type="hidden" name="task_id" value="<?php echo $row['id']; ?>">
-            <button type="submit">Complete</button>
-        </form>
+    // Task Name
+    echo '<label for="updated_task_name">Task Name:</label>';
+    echo '<input type="text" name="updated_task_name" value="' . $row['task_name'] . '">';
+    echo '<br>'; // Line break
+    echo '<br>'; // Line break
     
-        <form action="delete_task.php" method="post">
-            <input type="hidden" name="task_id" value="<?php echo $row['id']; ?>">
-            <button type="submit">Delete</button>
-        </form>
-    </div>
-<?php } 
+    // Task Details
+    echo '<label for="updated_details">Task Details:</label>';
+    echo '<textarea name="updated_details" placeholder="Updated Details">' . $row['task_details'] . '</textarea>';
+    echo '<br>'; // Line break
+    echo '<br>'; // Line break
+    
+    // Due Date
+    echo '<label for="updated_due_date">Due Date:</label>';
+    echo '<input type="date" name="updated_due_date" value="' . $row['due_date'] . '">';
+    echo '<br>'; // Line break
+    echo '<br>'; // Line break
+    
+    // Priority
+    echo '<label for="updated_priority">Priority:</label>';
+    echo '<select name="updated_priority">';
+    echo '<option value="Low" ' . ($row['priority'] === 'Low' ? 'selected' : '') . '>Low</option>';
+    echo '<option value="Medium" ' . ($row['priority'] === 'Medium' ? 'selected' : '') . '>Medium</option>';
+    echo '<option value="High" ' . ($row['priority'] === 'High' ? 'selected' : '') . '>High</option>';
+    echo '</select>';
+    
+    echo '<br>'; // Line break
+    echo '<br>'; // Line break
+    
+    // Submit button
+    echo '<input type="submit" value="Update Task">';
+    echo '</form>';
+    
+    
+    echo '<form action="complete_task.php" method="post">';
+    echo '<input type="hidden" name="task_id" value="' . $row['id'] . '">';
+    echo '<button type="submit">Complete</button>';
+    echo '</form>';
+    
+    echo '<form action="delete_task.php" method="post">';
+    echo '<input type="hidden" name="task_id" value="' . $row['id'] . '">';
+    echo '<button type="submit">Delete</button>';
+    echo '</form>';
+    
+    echo '</div>';
+}
+// Free the result set
+mysqli_free_result($result);
 
-        // Free the result set
-        mysqli_free_result($result);
+// Close the database connection
+mysqli_close($mysqli);
+?>
 
-        // Close the database connection
-        mysqli_close($mysqli);
-        ?>
     </div>
 </div>
 

@@ -1,4 +1,7 @@
 <?php
+
+// Frontend file to display the home page, written by John-Bryan Nicdao
+
 session_start();
 
 // Redirect to login if not logged in
@@ -98,22 +101,22 @@ if (isset($_POST['logout'])) {
 </ul>
 
 <div class="content">
-    <h1>Welcome to your Dashboard, <span class="username"><?= $_SESSION['username'] ?></span>!</h1>
+    <h1>Welcome Home, <span class="username"><?= $_SESSION['username'] ?></span>!</h1>
 
     <!-- Latest Tasks Container -->
     <div class="container" id="latestTasksContainer">
-        <h2>Latest Tasks</h2>
+        <h2><u>Latest Tasks</u></h2>
         <div id="tasksContent"></div>
     </div>
 
     <!-- Latest Events Container -->
     <div class="container" id="latestEventsContainer">
-        <h2>Latest Events</h2>
+        <h2><u>Latest Events</u></h2>
         <div id="eventsContent"></div>
     </div>
 
     <script>
-    // Function to fetch and display tasks
+    // Function to fetch and display tasks in Javascript
     function fetchAndDisplayTasks() {
         fetch('fetch_tasks.php')
             .then(response => response.json())
@@ -139,7 +142,7 @@ if (isset($_POST['logout'])) {
             .catch(error => console.error('Error fetching tasks:', error));
     }
 
-    // Function to fetch and display events
+    // Function to fetch and display events in Javascript
     function fetchAndDisplayEvents() {
         fetch('fetch_events.php')
             .then(response => response.json())

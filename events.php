@@ -107,7 +107,6 @@ session_start();
     <div class="event-list">
         <!-- PHP code to fetch events from the database and display them -->
         <?php
-        // Implement PHP logic here to fetch events from the database and display them
 
         // Connect to your MySQL database
         $servername = "localhost";

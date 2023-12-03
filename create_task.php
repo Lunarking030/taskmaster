@@ -41,16 +41,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Execute the prepared statement
     $result = mysqli_stmt_execute($stmt);
 
-    // Check if the query was successful
-    if ($result) {
-        // Task added successfully, trigger a JavaScript alert
-        echo "<script>alert('Task created successfully!');</script>";
-        header("Location: tasks.php");
-        exit(); // Ensuring no further code is ran after the redirect
-    } else {
-        // If the query fails, display an error message
-        echo "Error: " . mysqli_error($mysqli);
-    }
+  // Check if the query was successful
+if ($result) {
+    // Task created successfully, triggers a JavaScript alert
+    echo "<script>alert('Task created successfully!'); window.location.href = 'tasks.php';</script>";
+    exit(); // Ensuring no further code is run after the redirect
+} else {
+    // If the query fails, display an error message
+    echo "Error: " . mysqli_error($mysqli);
+}
+
 
     // Close the prepared statement
     mysqli_stmt_close($stmt);

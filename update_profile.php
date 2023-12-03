@@ -1,6 +1,6 @@
 <?php
 
-//backend file for updating user profile, written by John-Bryan Nicdao
+// Backend file for updating user profile, written by John-Bryan Nicdao
 
 // Establish your database connection here
 session_start();
@@ -17,16 +17,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['new_username'])) {
 
     // Add validation here if needed
 
-    // Update the username in the database
-    // Perform the SQL query to update the username for the logged-in user
-    // Example (assuming you have a users table):
-    // $userId = $_SESSION['user_id']; // Fetch user ID from session
-    // $sql = "UPDATE users SET username = '$newUsername' WHERE id = $userId";
-    // Execute the query using your database connection
+    // Placeholder for updating username in the database
+    // Example: fetching user ID from session and updating username in the database
+    $userId = $_SESSION['user_id']; // Fetch user ID from session
+    $mysqli = mysqli_connect($myserver, $myuserid, $mypassword, $mydatabase);
 
-    // Redirect back to account settings or home page after updating
-    header("Location: account_settings.php");
-    exit();
+    if ($mysqli) {
+        $updateQuery = "UPDATE users SET username = '$newUsername' WHERE id = $userId";
+        $updateResult = mysqli_query($mysqli, $updateQuery);
+
+        if ($updateResult) {
+            // Username updated successfully
+            header("Location: account_settings.php");
+            exit();
+        } else {
+            // Handle database update error
+            echo "Error updating username: " . mysqli_error($mysqli);
+        }
+
+        // Close the database connection
+        mysqli_close($mysqli);
+    } else {
+        // Handle database connection error
+        echo "Could not connect to MySQL server: " . mysqli_connect_error();
+    }
 } else {
     // Handle if the form wasn't submitted properly
     echo "Invalid request!";

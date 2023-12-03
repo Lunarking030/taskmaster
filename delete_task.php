@@ -1,5 +1,7 @@
 <?php
 
+//backend for deleting tasks on tasks page, written by John-Bryan Nicdao
+
 // Database connection
 $myserver = "localhost";
 $myuserid = "root"; // Replace with your MySQL username
