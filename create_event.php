@@ -17,9 +17,9 @@ if ($conn->connect_error) {
 
 // Fetch data from the form
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $title = $_POST['event_title']; // Adjust the name according to your form
-    $start_date = $_POST['start_date']; // Adjust the name according to your form
-    $end_date = $_POST['end_date']; // Adjust the name according to your form
+    $title = $_POST['event_title']; 
+    $start_date = $_POST['start_date']; 
+    $end_date = $_POST['end_date']; 
 
     // Prepare and execute the SQL INSERT statement
     $stmt = $conn->prepare("INSERT INTO events (title, start_date, end_date) VALUES (?, ?, ?)");
