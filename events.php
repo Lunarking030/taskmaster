@@ -35,7 +35,7 @@ session_start();
         }
 
         li a:hover {
-            background-color: #ddd;
+            background-color: #ddd;DS
             color: black;
         }
 
@@ -43,6 +43,10 @@ session_start();
             padding: 20px;
         }
 
+        .logout {
+            float: right; /* This aligns the logout button to the right */
+        }
+        
         /* Event list styles */
         .event-list {
             max-width: 600px;
@@ -71,6 +75,13 @@ session_start();
             border: 1px solid #ccc;
             box-sizing: border-box;
         }
+
+        /* CSS */
+        .no-events {
+        text-align: center;
+        margin-top: 20px; /* Adjust margin as needed */
+        }
+
     </style>
 </head>
 <body>
@@ -132,10 +143,7 @@ session_start();
                 echo '<h3>' . $row['title'] . '</h3>';
                 echo '<p>Start Date: ' . $row['start'] . '</p>';
                 echo '<p>End Date: ' . $row['end'] . '</p>';
-                echo '<form action="update_event.php" method="post">';
-                echo '<input type="hidden" name="event_id" value="' . $row['id'] . '">';
-                echo '<button type="submit">Update</button>';
-                echo '</form>';
+                // Remove the update form for each event
                 echo '<form action="delete_event.php" method="post">';
                 echo '<input type="hidden" name="event_id" value="' . $row['id'] . '">';
                 echo '<button type="submit">Delete</button>';
@@ -143,10 +151,9 @@ session_start();
                 echo '</div>';
             }
         } else {
-            echo '<p>No events found.</p>';
+            // Centered message when no events found
+            echo '<div class="no-events"><p>No events found.</p></div>';
         }
-
-      
 
         $conn->close();
         ?>

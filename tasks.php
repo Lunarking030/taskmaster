@@ -65,6 +65,10 @@ if (!$result) {
             color: black;
         }
 
+        .logout {
+            float: right; /* This aligns the logout button to the right */
+        }
+
         .content {
             padding: 20px;
         }
