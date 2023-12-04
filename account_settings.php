@@ -3,10 +3,10 @@
 // Frontend file for displaying account settings page, written by John-Bryan Nicdao
 
 
-// Simulated user data (replace with your actual user data retrieval logic)
+
 session_start();
 if(isset($_SESSION['username'])) {
-    $currentUserName = $_SESSION['username']; // Replace with the logged-in user's name
+    $currentUserName = $_SESSION['username']; // uses session for logged in user
 } else {
     // Redirect if not logged in
     header("Location: login.php");
@@ -76,16 +76,26 @@ if(isset($_SESSION['username'])) {
             box-sizing: border-box;
         }
 
-        /* Profile picture upload styles */
-        .profile-upload {
-            margin-top: 20px;
+        /* CSS for Account Settings Page */
+        .username {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px; /* Adjust spacing between picture and username */
         }
 
-        .profile-upload input[type="file"],
-        .profile-upload input[type="submit"] {
-            margin-top: 10px;
-            display: block;
+        .username img {
+            width: 50px; /* Adjust width */
+            height: auto;
+            border-radius: 50%; /* Rounded border for a circular profile picture */
+            margin-right: 10px; /* Adjust spacing between picture and username */
         }
+
+        .username p {
+            font-size: 18px; /* Adjust font size */
+            margin: 0; /* Remove default margin */
+        }
+
+
     </style>
 </head>
 <body>
@@ -106,6 +116,26 @@ if(isset($_SESSION['username'])) {
 
 <div class="content">
     <h1>Account Settings</h1>
+   <!-- Displaying Username and Profile Picture -->
+    <div class="username">
+    <?php
+    // Check if the profile picture path is set in session and display the image
+    if (isset($_SESSION['profile_picture'])) {
+        $profilePictureURL = $_SESSION['profile_picture'];
+        echo "<img src='$profilePictureURL' alt='Profile Picture'>";
+    }
+
+    // Display the username if available in session
+    if (isset($_SESSION['username'])) {
+        $username = $_SESSION['username'];
+        echo "<p>$username</p>";
+    }
+    ?>
+    </div>
+
+</div>
+
+
     <div class="account-form">
         <!-- Forms for changing username and password -->
         <form action="update_profile.php" method="post">
@@ -121,15 +151,17 @@ if(isset($_SESSION['username'])) {
         </form>
 
         <!-- Profile picture upload form -->
-        <div class="profile-upload">
-            <h3>Upload Profile Picture</h3>
-            <form action="upload_profile_picture.php" method="post" enctype="multipart/form-data">
-                <input type="file" name="profile_picture" accept="image/png, image/jpeg, image/gif" required>
-                <input type="submit" value="Upload">
-            </form>
-        </div>
-    </div>
+<div class="profile-upload">
+    <h3>Upload Profile Picture</h3>
+    <form action="upload_profile_picture.php" method="post" enctype="multipart/form-data">
+        <input type="file" name="profile_picture" accept="image/png, image/jpeg, image/gif" required>
+        <input type="submit" value="Upload Image">
+    </form>
 </div>
+
+
+
+
 
 </body>
 </html>
