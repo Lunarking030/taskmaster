@@ -10,8 +10,10 @@ session_start();
     <style>
         /* CSS for Events Page */
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
+            background-color:  #49a8e9; /* Change this color to the desired background color */
+            margin: 0;
+            padding: 0;
         }
 
         ul {
@@ -74,6 +76,7 @@ session_start();
             display: inline-block;
             border: 1px solid #ccc;
             box-sizing: border-box;
+            background-color: #f0f0f0;
         }
 
         /* CSS */

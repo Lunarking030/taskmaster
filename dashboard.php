@@ -29,8 +29,10 @@ if (isset($_POST['logout'])) {
     <style>
         /* CSS for Home Page */
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
+            background-color:  #49a8e9; /* Change this color to the desired background color */
+            margin: 0;
+            padding: 0;
         }
 
         ul {

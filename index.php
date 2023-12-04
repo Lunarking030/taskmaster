@@ -1,53 +1,39 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
 
+<!-- CSS and JS libraries -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" />
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 
 <script>
 
 
  $(document).ready(function() {
-
+  // Calendar initialization and configuration
   var date = new Date();
-
   var d = date.getDate();
-
   var m = date.getMonth();
-
   var y = date.getFullYear();
 
 
   var calendar = $('#calendar').fullCalendar({
-
    editable: true,
-
    header: {
-
     left: 'prev,next today',
-
     center: 'title',
-
     right: 'month,agendaWeek,agendaDay'
 
    },
 
 
-   events: "events.php",
+   events: "events.php", // Fetches events from server-side PHP script
 
-
+   // Various event handling functions for interactions with the calendar
    eventRender: function(event, element, view) {
 
     if (event.allDay === 'true') {
@@ -63,9 +49,7 @@
    },
 
    selectable: true,
-
    selectHelper: true,
-
    select: function(start, end, allDay) {
 
    var title = prompt('Event Title:');
@@ -74,15 +58,12 @@
    if (title) {
 
    var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
-
    var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
 
    $.ajax({
 
 	   url: 'add_events.php',
-
 	   data: 'title='+ title+'&start='+ start +'&end='+ end,
-
 	   type: "POST",
 
 	   success: function(json) {
@@ -98,11 +79,8 @@
    {
 
 	   title: title,
-
 	   start: start,
-
 	   end: end,
-
 	   allDay: allDay
 
    },
@@ -123,15 +101,12 @@
    eventDrop: function(event, delta) {
 
    var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
-
    var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
 
    $.ajax({
 
 	   url: 'update_events.php',
-
 	   data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id ,
-
 	   type: "POST",
 
 	   success: function(json) {
@@ -153,9 +128,7 @@
 	$.ajax({
 
 		type: "POST",
-
 		url: "delete_event.php",
-
 		data: "&id=" + event.id,
 
 		 success: function(json) {
@@ -173,15 +146,12 @@
    eventResize: function(event) {
 
 	   var start = $.fullCalendar.formatDate(event.start, "yyyy-MM-dd HH:mm:ss");
-
 	   var end = $.fullCalendar.formatDate(event.end, "yyyy-MM-dd HH:mm:ss");
 
 	   $.ajax({
 
 	    url: 'update_events.php',
-
 	    data: 'title='+ event.title+'&start='+ start +'&end='+ end +'&id='+ event.id ,
-
 	    type: "POST",
 
 	    success: function(json) {
@@ -206,15 +176,12 @@
 </script>
 
 <style>
-
+/* CSS styles for calendar appearance */
  body {
 
   margin-top: 40px;
-
   text-align: center;
-
   font-size: 14px;
-
   font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
 
   }
@@ -222,23 +189,21 @@
  #calendar {
 
   width: 650px;
-
   margin: 0 auto;
 
   }
 
 </style>
-
 </head>
 
 
 <body>
-
+ <!-- Calendar container -->
  <h2>Full calendar php mysql example</h2>
 
  <br/>
 
- <div id='calendar'></div>
+ <div id='calendar'></div> <!-- Calendar is displayed inside this div -->
 
 </body>
 

@@ -6,16 +6,17 @@
      /* Basic CSS for registration form */
      body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #ADD8E6; /* light blue color for background */
             margin: 0;
             padding: 0;
         }
+        
         .registration-container {
             width: 400px;
             margin: 50px auto;
             padding: 20px;
             border-radius: 5px;
-            background-color: #fff;
+            background-color: #f0f0f0; /* light grey color for background */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h2 {

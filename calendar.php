@@ -13,7 +13,12 @@
         body {
             margin: 0; /* Set margin to zero to touch the top */
             font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+            background-color:  #49a8e9; /* Change this color to the desired background color */
+            margin: 0;
+            padding: 0;
         }
+        
+        
 
         ul {
             list-style-type: none;
@@ -47,8 +52,8 @@
         #calendar {
             width: 650px;
             margin: 0 auto;
+            background-color: #f0f0f0; /* Add this line to set the calendar background to white */
         }
-
         h2 {
             text-align: center;
         }

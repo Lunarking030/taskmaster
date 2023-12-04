@@ -26,8 +26,10 @@ if(isset($_SESSION['username'])) {
     <style>
         /* CSS for Account Settings Page */
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
+            background-color:  #49a8e9; 
+            margin: 0;
+            padding: 0;
         }
 
         ul {
@@ -78,6 +80,7 @@ if(isset($_SESSION['username'])) {
             display: inline-block;
             border: 1px solid #ccc;
             box-sizing: border-box;
+            background-color: #f0f0f0;
         }
 
         /* CSS for Account Settings Page */
