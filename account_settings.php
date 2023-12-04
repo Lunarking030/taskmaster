@@ -5,6 +5,10 @@
 
 
 session_start();
+
+
+
+
 if(isset($_SESSION['username'])) {
     $currentUserName = $_SESSION['username']; // uses session for logged in user
 } else {
@@ -160,7 +164,9 @@ if(isset($_SESSION['username'])) {
 </div>
 
 
-
+<?php 
+include('footer.php'); // add copyright stuff at the end of the page
+?>
 
 
 </body>

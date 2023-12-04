@@ -146,13 +146,17 @@ session_start();
             echo '<p>No events found.</p>';
         }
 
-
+      
 
         $conn->close();
         ?>
-        <!-- End of PHP code -->
+        
     </div>
 </div>
+
+<?php 
+        include('footer.php'); // add copyright stuff at the end of the page
+    ?>
 
 </body>
 </html>

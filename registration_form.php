@@ -74,5 +74,10 @@
         </form>
         <p>Already have an account? <a href="login.php">Login here</a></p>
     </div>
+
+    <?php 
+include('footer.php'); // add copyright stuff at the end of the page
+?>
+
 </body>
 </html>

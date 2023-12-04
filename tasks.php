@@ -200,5 +200,10 @@ mysqli_close($mysqli);
     </div>
 </div>
 
+<?php 
+        include('footer.php'); // add copyright stuff at the end of the page
+    ?>
+
+
 </body>
 </html>

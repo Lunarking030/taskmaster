@@ -172,6 +172,9 @@ if (isset($_POST['logout'])) {
 </script>
 </div>
 
+<?php 
+        include('footer.php'); // add copyright stuff at the end of the page
+    ?>
 
 </body>
 </html>
