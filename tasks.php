@@ -2,6 +2,16 @@
 
 // Frontend file for displaying the tasks page, written by John-Bryan Nicdao
 
+
+session_start();
+
+// Redirect to login if not logged in
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+
+
 // Database connection
 $myserver = "localhost";
 $myuserid = "root"; // Replace with your MySQL username
